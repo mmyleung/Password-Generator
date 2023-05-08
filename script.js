@@ -134,19 +134,31 @@ function generatePassword() {
     characterTypes.unshift(specialCharacters);
   }
 
- 
+  //empty array to store characters of password
+  var passwordArray = [];
+  for (let i = 0; i < passwordLength; i++) {
+      //randomCharacterType stores a randomcharactertype
+      var randomCharacterType = characterTypes[Math.floor(Math.random()*characterTypes.length)];
+      passwordArray.unshift(getRandom(randomCharacterType));
+  }
+  console.log(passwordArray);
+  
+  //checks if every value in array contains one of the character types that is required
 
-    //empty array to store characters of password
-    var passwordArray = [];
-    for (let i = 0; i < passwordLength; i++) {
-       //randomCharacterType stores a randomcharactertype
-        var randomCharacterType = characterTypes[Math.floor(Math.random()*characterTypes.length)];
-        passwordArray.unshift(getRandom(randomCharacterType));
+  //concat required characters into one array
+  var allRequiredCharacters = [];
+    for (let j = 0; j < characterTypes.length; j++) {
+      console.log(characterTypes[j]);
+      allRequiredCharacters = allRequiredCharacters.concat(characterTypes[j]);
     }
-    console.log(passwordArray);
-    
-    //convert array into string
-    return passwordArray.join("");
+    console.log(allRequiredCharacters);
+  // function checkCharacters(value) {
+  //   return value == characterTypes;
+  // }
+
+  // console.log(passwordArray.every(checkCharacters));
+  //convert array into string
+  return passwordArray.join("");
 };
 
 // Get references to the #generate element
