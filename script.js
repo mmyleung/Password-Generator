@@ -88,13 +88,17 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+var characterTypes = [specialCharacters, numericCharacters, lowerCasedCharacters, upperCasedCharacters];
+var randomCharacterType = characterTypes[Math.floor(Math.random()*characterTypes.length)];
+console.log(randomCharacterType); 
+
 // Function to prompt user for password options
 function getPasswordOptions() {
   var passwordLength = prompt(`How many characters do you want your password? Enter number between 10 - 64.`);
-  var lowerCaseNeeded = prompt(`Do you need lowercase characters? Enter Y for yes, N for no.`);
-  var upperCaseNeeded = prompt(`Do you need uppercase characters? Enter Y for yes, N for no.`);
-  var numericNeeded = prompt(`Do you need numeric characters? Enter Y for yes, N for no.`);
-  var specialNeeded = prompt(`Do you need special characters? (eg.$@%&*, etc.) Enter Y for yes, N for no.`);
+  var lowerCaseNeeded = confirm(`Do you need lowercase characters? Click OK for yes, Cancel for no.`);
+  var upperCaseNeeded = confirm(`Do you need uppercase characters? Click OK for yes, Cancel for no.`);
+  var numericNeeded = confirm(`Do you need numerical characters? Click OK for yes, Cancel for no.`);
+  var specialNeeded = confirm(`Do you need special characters($@%&*, etc.)? Click OK for yes, Cancel for no.`);
 }
 
 // Function for getting a random element from an array
@@ -103,11 +107,13 @@ function getRandom(arr) {
   return arr[randomNumber];
 }
 
-console.log(getRandom(upperCasedCharacters));
-
 // Function to generate password with user input
-function generatePassword() {
-
+function generatePassword(passwordLength) {
+  //generate at least one of each character type
+//function to run loop how many times depending on how many characters the user wants
+for (let i=0; i=passwordLength; i++) {
+  return getRandom(lowerCasedCharacters);
+}
 }
 
 // Get references to the #generate element
@@ -124,3 +130,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
+
+//depending on password length, then decide how many of each character needed
+//if password length equals 10, then 10/however many characters = true
