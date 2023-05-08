@@ -145,10 +145,8 @@ function generatePassword() {
     }
     console.log(passwordArray);
     
-// //function to run loop how many times depending on how many characters the user wants
-// for (let i=0; i=passwordLength; i++) {
-//   return getRandom(lowerCasedCharacters);
-// }
+    //convert array into string
+    return passwordArray.join("");
 };
 
 // Get references to the #generate element
