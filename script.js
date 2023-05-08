@@ -88,17 +88,22 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-var characterTypes = [specialCharacters, numericCharacters, lowerCasedCharacters, upperCasedCharacters];
-var randomCharacterType = characterTypes[Math.floor(Math.random()*characterTypes.length)];
-console.log(randomCharacterType); 
+
+
+var passwordLength;
+var lowerCaseNeeded;
+var upperCaseNeeded;
+var numericNeeded;
+var specialNeeded;
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  var passwordLength = prompt(`How many characters do you want your password? Enter number between 10 - 64.`);
-  var lowerCaseNeeded = confirm(`Do you need lowercase characters? Click OK for yes, Cancel for no.`);
-  var upperCaseNeeded = confirm(`Do you need uppercase characters? Click OK for yes, Cancel for no.`);
-  var numericNeeded = confirm(`Do you need numerical characters? Click OK for yes, Cancel for no.`);
-  var specialNeeded = confirm(`Do you need special characters($@%&*, etc.)? Click OK for yes, Cancel for no.`);
+  passwordLength = prompt(`How many characters do you want your password? Enter number between 10 - 64.`);
+  lowerCaseNeeded = confirm(`Do you need lowercase characters? Click OK for yes, Cancel for no.`);
+  upperCaseNeeded = confirm(`Do you need uppercase characters? Click OK for yes, Cancel for no.`);
+  numericNeeded = confirm(`Do you need numerical characters? Click OK for yes, Cancel for no.`);
+  specialNeeded = confirm(`Do you need special characters($@%&*, etc.)? Click OK for yes, Cancel for no.`);
+  return;
 }
 
 // Function for getting a random element from an array
@@ -108,13 +113,43 @@ function getRandom(arr) {
 }
 
 // Function to generate password with user input
-function generatePassword(passwordLength) {
-  //generate at least one of each character type
-//function to run loop how many times depending on how many characters the user wants
-for (let i=0; i=passwordLength; i++) {
-  return getRandom(lowerCasedCharacters);
-}
-}
+function generatePassword() {
+
+  //empty array to store character types needed in password
+
+  var characterTypes = [];
+
+  //if statements to determine if charactertypes are needed and add to characterTypes array
+
+  if(lowerCaseNeeded) {
+    characterTypes.unshift(lowerCasedCharacters);
+  }
+  if(upperCaseNeeded) {
+    characterTypes.unshift(upperCasedCharacters);
+  }
+  if(numericNeeded) {
+    characterTypes.unshift(numericCharacters);
+  }
+  if(specialNeeded) {
+    characterTypes.unshift(specialCharacters);
+  }
+
+ 
+
+    //empty array to store characters of password
+    var passwordArray = [];
+    for (let i = 0; i < passwordLength; i++) {
+       //randomCharacterType stores a randomcharactertype
+        var randomCharacterType = characterTypes[Math.floor(Math.random()*characterTypes.length)];
+        passwordArray.unshift(getRandom(randomCharacterType));
+    }
+    console.log(passwordArray);
+    
+// //function to run loop how many times depending on how many characters the user wants
+// for (let i=0; i=passwordLength; i++) {
+//   return getRandom(lowerCasedCharacters);
+// }
+};
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
